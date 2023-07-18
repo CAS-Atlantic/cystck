@@ -1,0 +1,37 @@
+name: Tests
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        git clone -b master --single-branch https://github.com/hpyproject/hpy
+        cd hpy
+        git checkout bba7ec5f0
+        pip install .
+        pip install pytest six pytz
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: build
+      run: make
+
+    - name: Run tests
+      run: make test

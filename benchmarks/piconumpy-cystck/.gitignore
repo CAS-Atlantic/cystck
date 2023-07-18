@@ -1,0 +1,16 @@
+
+*.egg-info/*
+*/__pycache__/*
+build
+.eggs
+
+*.so
+.vscode
+
+**/tmp*.*
+**/tmp*.*
+
+*_cython.c
+Pico/
+dist/
+n_test.py

@@ -1,0 +1,4 @@
+build/
+dist/
+ujson_cystck.egg-info/
+.pytest_cache/
